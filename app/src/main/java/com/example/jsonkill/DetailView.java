@@ -3,7 +3,10 @@ package com.example.jsonkill;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
@@ -22,13 +25,16 @@ public class DetailView extends AppCompatActivity {
         TextView textAddress = findViewById(R.id.textView_Address);
         TextView textCompany = findViewById(R.id.textView_company);
         TextView textEmail = findViewById(R.id.textView_email);
+        ImageView imageAvatar = findViewById(R.id.imageView);
         StringBuilder address, company;
         address = new StringBuilder();
         company = new StringBuilder();
-        JSONObject JSONAddress, JSONCompany;
+        JSONObject JSONAddress, JSONCompany, JSONAvatar;
         try {
             JSONAddress = new JSONObject(itemModel.getAddress());
             JSONCompany = new JSONObject(itemModel.getCompany());
+            JSONAvatar = new JSONObject(itemModel.getAvatar());
+            Picasso.get().load("https://lebavui.github.io" + JSONAvatar.getString("photo")).into(imageAvatar);
             address.append("Street: ").append(JSONAddress.getString("street")).append("\n")
                     .append("Suite: ").append(JSONAddress.getString("suite")).append("\n")
                     .append("City: ").append(JSONAddress.getString("city")).append("\n")
